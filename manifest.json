@@ -1,9 +1,9 @@
 {
   "name": "thetanuts",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "Thetanuts OpenClaw Skill - Trade crypto options with integrated wallet management",
   "homepage": "https://github.com/goheesheng/thetanuts-openclaw",
-  "updateUrl": "https://raw.githubusercontent.com/goheesheng/thetanuts-openclaw/v1.5.2/scripts/update-from-manifest.sh",
+  "updateUrl": "https://raw.githubusercontent.com/goheesheng/thetanuts-openclaw/v1.5.3/scripts/update-from-manifest.sh",
   "files": [
     "SKILL.md",
     "README.md",
@@ -34,10 +34,10 @@
     "scripts/fill-order.ts"
   ],
   "checksums": {
-    "SKILL.md": "sha256:88772c53b2b242a4d16db039b8afbe138570687b4ea9ce42f15c34a3cfe9a177",
+    "SKILL.md": "sha256:cf21d1351fc21f3d322916eecfc8826ae35a0532c335cf705eb6ad39c25616dd",
     "README.md": "sha256:212863d465623fd69d7bb5157b715113b8ff24fa60a05654360aa779fb01152d",
-    "CLAUDE.md": "sha256:ff74adab9c850607bf6e9cec32133ef4906ced6f68739bfc018c4223f1c69ec6",
-    "scripts/onboard.sh": "sha256:77485d34709044f5eb7d1a84beda85e8dce0b1cb6c75322ec8022cf1cc37917e",
+    "CLAUDE.md": "sha256:2cf1d8eaf857726476c3dc0b28b7b587b251a1420fa856829f61b2dc01d67174",
+    "scripts/onboard.sh": "sha256:be3780e37d1b5414985a813108201f3fd346592dc1cfda9c1b51913b84049ac0",
     "scripts/update.sh": "sha256:de376b31d5f544e82d7db7e1e0080a462918b0213fc8310735eff12b277f5114",
     "scripts/lib/load-seed.ts": "sha256:1d77aa17ad8b689afe679a472f6f37149a0ac893d92467fa6dd660a09a1c244c",
     "scripts/approve-token.ts": "sha256:cd063f380d77f9d04323353142130331c3a1ca5f93547b92f78ad5a6b6f3d3eb",
@@ -48,5 +48,5 @@
     "scripts/sign-message.ts": "sha256:37a2d22a80030d90e782c15d2425812329b4a5ce2477394f0911fdbb0e3bee6d",
     "scripts/check-orderbook.ts": "sha256:3f40d453eb4402212285c83e10810a6f98649403a42cf5330999562ca4727e76"
   },
-  "lastUpdated": "2026-05-14T00:00:00.000Z"
+  "lastUpdated": "2026-05-25T00:00:00.000Z"
 }
