@@ -7,9 +7,17 @@
 - `scripts/onboard.sh` - Installs deps at project root AND `~/.openclaw/wdk-mcp/`
 - `manifest.json` - ClawHub publishing metadata
 
-## SDK Quirks (@thetanuts-finance/thetanuts-client, ^0.2.3)
+## SDK Quirks (@thetanuts-finance/thetanuts-client, ^0.2.4)
 - `client.erc20.approve()` returns a TransactionReceipt, NOT TransactionResponse. Do not call `.wait()` on it.
 - `client.optionBook.fillOrder()` same — returns receipt, already waited internally.
+- r12 settlement is automatic via `notifyTradeSettled`. There is NO zero-arg `BaseOption.payout()` write call — SDK ≥ 0.2.4 throws `INVALID_PARAMS` on the legacy method. Read `client.option.getOptionInfo(addr).settled` for status; use `client.option.calculatePayout(addr, settlementPrice)` (view) for amounts.
+- `client.option.reclaimCollateral(optionAddress, ownedOption)` and `client.loan.reclaimCollateral(...)` are now payable — the SDK reads `getReclaimFee(ownedOption)` and forwards as `msg.value`. Don't call the raw contract or you'll forget the fee.
+- `client.loan.splitOption(optionAddress, amount)` is payable — SDK reads `getSplitFee()` and forwards as `msg.value`.
+- `client.collar` exists but the `CollarLoanCoordinator` is a zero address on Base — write methods throw `NETWORK_UNSUPPORTED` until collar-v12 deploys. Pricing/estimation (`estimateCollar`, `getCapStrikeOptions`) works today.
+- `client.optionFactory` lost referral/admin surface in 0.2.4: `getOfferSignature`, `getPendingFees`, `getReferralOwner`, `withdrawFees`, `renounceOwnership`, `transferOwnership` no longer exist.
+- `client.vault.trigger()` removed in 0.2.4.
+- `RFQBuilderParams.requesterPublicKey?: string` was added — `requestLoan()` auto-resolves it via `client.rfqKeys.getOrCreateKeyPair()`. Only set explicitly for viem/wagmi integrations using `encodeRequestLoan`.
+- `validateAddress(addr, field)` now RETURNS the EIP-55 checksummed form (previously returned void). Legacy ignore-return callsites still work.
 - `client.erc20.getBalance(token, address)` returns `Promise<bigint>`.
 - `client.erc20.getAllowance(token, owner, spender)` returns `Promise<bigint>`.
 - Strikes use 8 decimals internally. USDC uses 6, WETH uses 18.

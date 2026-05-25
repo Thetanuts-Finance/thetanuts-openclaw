@@ -1011,6 +1011,8 @@ When an option settles at expiry, these events are emitted:
 | `OptionPayoutEvent` | buyer, amountPaidOut | Buyer receives payout (if ITM) |
 | `CollateralReturnedEvent` | seller, amountReturned | Seller gets remaining collateral back |
 
+> **r12 settlement is automatic.** On the Base_r12 deployment, options no longer expose a zero-arg `payout()` write entrypoint — settlement fires from the factory's `notifyTradeSettled` callback once the oracle records the final price. SDK ≥ 0.2.4 throws `INVALID_PARAMS` on any legacy `payout()` call; check status with `client.option.getOptionInfo(optionAddress).settled` and read amounts with the view methods above. Reclaiming collateral after settlement uses `client.option.reclaimCollateral(optionAddress, ownedOption)` — the SDK auto-forwards `getReclaimFee()` as `msg.value`.
+
 #### Physical Settlement (PHYSICAL_CALL / PHYSICAL_PUT)
 
 Physical options involve actual asset delivery instead of cash settlement:
@@ -1091,6 +1093,7 @@ The `previewFillOrder()` method handles these calculations automatically for all
 | `client.pricing` | Option pricing, Greeks | No |
 | `client.mmPricing` | Market maker pricing with fee adjustments | No |
 | `client.rfqKeys` | ECDH keypair management for sealed-bid RFQ encryption | No |
+| `client.collar` | Collar loans (capped-upside, zero-interest). Pricing/estimation works today; write methods throw `NETWORK_UNSUPPORTED` until `CollarLoanCoordinator` is deployed on Base. | Write ops only |
 | `client.utils` | Decimal conversions, payoffs | No |
 
 ---
@@ -1733,7 +1736,7 @@ When a user asks a technical question about the Thetanuts SDK:
 
 ## Contract Addresses (Base Mainnet, chain 8453)
 
-> **Source of truth:** these mirror `@thetanuts-finance/thetanuts-client@^0.2.3` `CHAIN_CONFIGS_BY_ID[8453]`. Do not hard-code addresses in scripts — read them from `client.chainConfig` so future SDK upgrades stay in sync. If you ever see a mismatch, the SDK wins.
+> **Source of truth:** these mirror `@thetanuts-finance/thetanuts-client@^0.2.4` `CHAIN_CONFIGS_BY_ID[8453]`. Do not hard-code addresses in scripts — read them from `client.chainConfig` so future SDK upgrades stay in sync. If you ever see a mismatch, the SDK wins.
 
 ### Core Contracts — Base_r12 (deployed 2026-05-05, block 45601440)
 
