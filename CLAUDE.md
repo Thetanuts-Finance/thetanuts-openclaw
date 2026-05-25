@@ -32,7 +32,7 @@
 - Two install targets: project root (for scripts) and `~/.openclaw/wdk-mcp/` (for MCP runtime).
 
 ## Repo
-- GitHub: `goheesheng/thetanuts-openclaw`
+- GitHub: `Thetanuts-Finance/thetanuts-openclaw` (canonical; `goheesheng/thetanuts-openclaw` is the legacy fork)
 - ClawHub: `clawhub.ai/goheesheng/thetanuts`
 - Published with: `clawhub skill publish /absolute/path --slug thetanuts --version X.Y.Z`
 
